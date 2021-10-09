@@ -14,44 +14,40 @@ import Todos from "./Pages/Todos";
 import { FAB } from "react-native-paper";
 import Modal from "./components/Modal";
 import * as Animatable from "react-native-animatable";
-import { COLORS } from "./theme/Colors";
 
 export default function App() {
   const [showAdd, setAdd] = React.useState(false);
 
   return (
-    <>
-      <SafeAreaView>
-        <View style={styles.container}>
-          <ScrollView>
-            <Text style={styles.heading}>My todos</Text>
-            <Todos />
-          </ScrollView>
-          {showAdd && (
-            <Animatable.View style={styles.modal} animation="fadeInUpBig">
-              <TouchableWithoutFeedback onPress={() => alert("")}>
-                <Modal />
-              </TouchableWithoutFeedback>
-            </Animatable.View>
-          )}
-        </View>
-        <FAB
-          style={{
-            ...styles.fab,
-            backgroundColor: showAdd ? COLORS.primary : COLORS.accent,
-          }}
-          icon={showAdd ? "close" : "plus"}
-          onPress={() => setAdd(!showAdd)}
-        />
-      </SafeAreaView>
-    </>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <ScrollView>
+          <Text style={styles.heading}>My todos</Text>
+          <Todos />
+        <StatusBar style="auto" />
+        </ScrollView>
+        {showAdd && (
+          <Animatable.View style={styles.modal} animation="fadeInUpBig">
+            <TouchableWithoutFeedback onPress={() => alert("")}>
+              <Modal />
+            </TouchableWithoutFeedback>
+          </Animatable.View>
+        )}
+      </View>
+      <FAB
+        style={styles.fab}
+        small
+        icon="plus"
+        onPress={() => setAdd(!showAdd)}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: COLORS.primary,
+    backgroundColor: "#63a1ff",
   },
   heading: {
     color: "white",
@@ -77,5 +73,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     elevation: 4,
     padding: 10,
+    // backgroundColor: "rgba(0,0,0,0.4)",
   },
 });

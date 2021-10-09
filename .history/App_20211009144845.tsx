@@ -36,10 +36,8 @@ export default function App() {
           )}
         </View>
         <FAB
-          style={{
-            ...styles.fab,
-            backgroundColor: showAdd ? COLORS.primary : COLORS.accent,
-          }}
+          style={styles.fab}
+          small
           icon={showAdd ? "close" : "plus"}
           onPress={() => setAdd(!showAdd)}
         />

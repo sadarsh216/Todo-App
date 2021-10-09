@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useRef } from "react";
 import {
   SafeAreaView,
@@ -8,50 +7,67 @@ import {
   TouchableWithoutFeedback,
   View,
   Animated,
-  Easing,
 } from "react-native";
 import Todos from "./Pages/Todos";
 import { FAB } from "react-native-paper";
 import Modal from "./components/Modal";
-import * as Animatable from "react-native-animatable";
-import { COLORS } from "./theme/Colors";
+
+const FadeInView = (props) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+
+  React.useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 10000,
+    }).start();
+  }, [fadeAnim]);
+
+  return (
+    <Animated.View // Special animatable View
+      style={{
+        ...props.style,
+        opacity: fadeAnim, // Bind opacity to animated value
+      }}
+    >
+      {props.children}
+    </Animated.View>
+  );
+};
 
 export default function App() {
   const [showAdd, setAdd] = React.useState(false);
 
   return (
-    <>
-      <SafeAreaView>
-        <View style={styles.container}>
-          <ScrollView>
-            <Text style={styles.heading}>My todos</Text>
-            <Todos />
-          </ScrollView>
-          {showAdd && (
-            <Animatable.View style={styles.modal} animation="fadeInUpBig">
+    <SafeAreaView>
+      <View style={styles.container}>
+        <ScrollView>
+          <Text style={styles.heading}>My todos</Text>
+          <Todos />
+        </ScrollView>
+        {showAdd && (
+          <FadeInView>
+            <View style={styles.modal}>
               <TouchableWithoutFeedback onPress={() => alert("")}>
                 <Modal />
               </TouchableWithoutFeedback>
-            </Animatable.View>
-          )}
-        </View>
-        <FAB
-          style={{
-            ...styles.fab,
-            backgroundColor: showAdd ? COLORS.primary : COLORS.accent,
-          }}
-          icon={showAdd ? "close" : "plus"}
-          onPress={() => setAdd(!showAdd)}
-        />
-      </SafeAreaView>
-    </>
+            </View>
+          </FadeInView>
+        )}
+      </View>
+      <FAB
+        style={styles.fab}
+        small
+        icon="plus"
+        onPress={() => setAdd(!showAdd)}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: COLORS.primary,
+    backgroundColor: "#63a1ff",
   },
   heading: {
     color: "white",
@@ -77,5 +93,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     elevation: 4,
     padding: 10,
+    // backgroundColor: "rgba(0,0,0,0.4)",
   },
 });

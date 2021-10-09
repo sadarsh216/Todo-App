@@ -14,7 +14,6 @@ import Todos from "./Pages/Todos";
 import { FAB } from "react-native-paper";
 import Modal from "./components/Modal";
 import * as Animatable from "react-native-animatable";
-import { COLORS } from "./theme/Colors";
 
 export default function App() {
   const [showAdd, setAdd] = React.useState(false);
@@ -36,14 +35,13 @@ export default function App() {
           )}
         </View>
         <FAB
-          style={{
-            ...styles.fab,
-            backgroundColor: showAdd ? COLORS.primary : COLORS.accent,
-          }}
-          icon={showAdd ? "close" : "plus"}
+          style={styles.fab}
+          small
+          icon="plus"
           onPress={() => setAdd(!showAdd)}
         />
       </SafeAreaView>
+      <StatusBar style="auto" />
     </>
   );
 }
@@ -51,7 +49,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: COLORS.primary,
+    backgroundColor: "#63a1ff",
   },
   heading: {
     color: "white",
@@ -77,5 +75,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     elevation: 4,
     padding: 10,
+    // backgroundColor: "rgba(0,0,0,0.4)",
   },
 });

@@ -36,10 +36,8 @@ export default function App() {
           )}
         </View>
         <FAB
-          style={{
-            ...styles.fab,
-            backgroundColor: showAdd ? COLORS.primary : COLORS.accent,
-          }}
+          style={styles.fab}
+          small
           icon={showAdd ? "close" : "plus"}
           onPress={() => setAdd(!showAdd)}
         />
@@ -51,7 +49,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.text,
   },
   heading: {
     color: "white",
@@ -77,5 +75,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     elevation: 4,
     padding: 10,
+    // backgroundColor: "rgba(0,0,0,0.4)",
   },
 });

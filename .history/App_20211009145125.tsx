@@ -40,6 +40,7 @@ export default function App() {
             ...styles.fab,
             backgroundColor: showAdd ? COLORS.primary : COLORS.accent,
           }}
+          small
           icon={showAdd ? "close" : "plus"}
           onPress={() => setAdd(!showAdd)}
         />
